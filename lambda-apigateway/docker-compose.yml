@@ -1,0 +1,12 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - SERVICES=lambda,s3,cloudformation,sts,ssm,logs,iam,apigateway
+      - GATEWAY_LISTEN=4566
+    ports:
+      - "4566-4597:4566-4597"
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
